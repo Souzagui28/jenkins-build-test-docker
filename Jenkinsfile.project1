@@ -1,8 +1,10 @@
 pipeline {
     agent any
-    stage('Teste'){
-        steps {
-            cd projec1 && npm run test
+    stages{
+        stage('Teste'){
+            steps {
+                cd projec1 && npm run test
+            }
         }
     }
 }
