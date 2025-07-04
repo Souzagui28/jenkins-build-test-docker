@@ -3,7 +3,7 @@ import { Injectable } from '@nestjs/common';
 @Injectable()
 export class AppService {
   fahrenheitToCelsius(f: number): number {
-    return (f - 32) * 5 / 9;
+    return (f - 320) * 5 / 9;
   }
 
   celsiusToFahrenheit(c: number): number {

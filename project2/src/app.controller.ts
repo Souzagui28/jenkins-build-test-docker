@@ -12,6 +12,6 @@ export class AppController {
 
   @Get('to-fahrenheit')
   toFahrenheit(@Query('c') c: number) {
-    return { fahrenheit: this.appService.celsiusToFahrenheit(c) };
+    return { fahrenheit: this.appService.celsiusToFahrenheit(c);
   }
 }
