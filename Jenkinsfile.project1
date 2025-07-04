@@ -1,7 +1,12 @@
-pipeline {
-    agent any
+pipeline { 
+    /*agent any
     tools{
         nodejs 'Nodejs'
+    }*/
+    agent {
+        docker {
+            image 'node:20-alpine'
+        }
     }
     stages{
         stage('Teste'){
