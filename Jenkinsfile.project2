@@ -1,25 +1,30 @@
 pipeline { 
-    /*agent any
-    tools{
-        nodejs 'Nodejs'
-    }*/
-    agent {
-        docker {
-            image 'node:20-alpine'
-        }
-    }
+    agent none
     stages{
         stage('Teste'){
+            agent {
+                docker {
+                    image 'node:20-alpine'
+                }
+            }
             steps {
                 dir('project2'){
+                    sh 'echo --------------------------- EXECUTANDO NPM INSTALL ---------------------------'
                     sh 'npm install'
+                    sh 'echo --------------------------- EXECUTANDO TESTES ---------------------------'
                     sh 'npm run test'
                 }
             }
         }
         stage('Build'){
+            agent {
+                docker {
+                    image 'node:20-alpine'
+                }
+            }
             steps {
                 dir('project2'){
+                    sh 'echo --------------------------- EXECUTANDO BUILD ---------------------------'
                     sh 'npm run build'
                 }
             }
