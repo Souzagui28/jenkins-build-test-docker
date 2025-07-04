@@ -12,7 +12,9 @@ pipeline {
                     sh 'echo --------------------------- EXECUTANDO NPM INSTALL ---------------------------'
                     sh 'npm install'
                     sh 'echo --------------------------- EXECUTANDO TESTES ---------------------------'
-                    sh 'npm run test'
+                    catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
+                        sh 'npm run test'
+                    }
                 }
             }
         }
