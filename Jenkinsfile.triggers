@@ -1,0 +1,38 @@
+pipeline { 
+    agent none
+    triggers {
+        cron('30 * * * *')
+    }
+    stages{
+        stage('Teste'){
+            agent {
+                docker {
+                    image 'node:20-alpine'
+                }
+            }
+            steps {
+                dir('project1'){
+                    sh 'echo --------------------------- EXECUTANDO NPM INSTALL ---------------------------'
+                    sh 'npm install'
+                    sh 'echo --------------------------- EXECUTANDO TESTES ---------------------------'
+                    catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
+                        sh 'npm run test'
+                    }
+                }
+            }
+        }
+        stage('Build'){
+            agent {
+                docker {
+                    image 'node:20-alpine'
+                }
+            }
+            steps {
+                dir('project1'){
+                    sh 'echo --------------------------- EXECUTANDO BUILD ---------------------------'
+                    sh 'npm run build'
+                }
+            }
+        }
+    }
+}
